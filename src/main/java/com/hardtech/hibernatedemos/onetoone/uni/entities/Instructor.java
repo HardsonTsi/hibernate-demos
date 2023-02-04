@@ -1,4 +1,4 @@
-package com.hardtech.hibernatedemos.entities;
+package com.hardtech.hibernatedemos.onetoone.uni.entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,7 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Student {
+@Table(name = "instructor")
+public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -20,8 +21,13 @@ public class Student {
     String firstName;
     @Column(name = "last_name")
     String lastName;
+    @Column(name = "email")
     String email;
-    public Student(String firstName, String lastName, String email) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "instructor_detail_id")
+    InstructorDetail instructorDetail;
+
+    public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -29,11 +35,12 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Instructor{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }
