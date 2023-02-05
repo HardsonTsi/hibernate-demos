@@ -28,22 +28,20 @@ public class OneToManyUniDemo {
         try (factory) {
             Session session = factory.getCurrentSession();
 
-            //create a course
-            Course course = new Course("Network");
 
-            //add some reviews
-            course.addReview(new Review("Great course"));
-            course.addReview(new Review("Good program"));
-            course.addReview(new Review("Good job !"));
-
-            //save the course... and leverage the cascade all !
-            log.info("Saving  the course: {}", course);
-            log.info("Reviews: {}", course.getReviews());
 
             //start a transaction
             session.beginTransaction();
 
-            session.save(course);
+            //get the course
+            Long id = 3L;
+            Course course = session.get(Course.class, id);
+
+            //print the course
+                log.info("Course: {}", course);
+
+            //print the course reviews
+            log.info("Reviews: {}", course.getReviews());
 
             //commit transaction
             session.getTransaction().commit();
