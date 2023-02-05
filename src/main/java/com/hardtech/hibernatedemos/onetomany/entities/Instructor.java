@@ -1,9 +1,11 @@
-package com.hardtech.hibernatedemos.onetoone.bid.entities;
+package com.hardtech.hibernatedemos.onetomany.entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -11,6 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "instructor")
 public class Instructor {
@@ -27,20 +30,23 @@ public class Instructor {
     @JoinColumn(name = "instructor_detail_id")
     InstructorDetail instructorDetail;
 
+    //do not apply cascading deletes
+    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @ToString.Exclude
+    List<Course> courses = new ArrayList<>();
+
     public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", instructorDetail=" + instructorDetail +
-                '}';
+    //convenience methods for bidirectional relationship
+    public void addCourse(Course course) {
+        this.courses.add(course);
+        course.setInstructor(this);
     }
+
+
 }
