@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "instructor")
 public class Instructor {
@@ -34,7 +33,6 @@ public class Instructor {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    @ToString.Exclude
     List<Course> courses = new ArrayList<>();
 
     public Instructor(String firstName, String lastName, String email) {
@@ -49,5 +47,12 @@ public class Instructor {
         course.setInstructor(this);
     }
 
-
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "firstName = " + firstName + ", " +
+                "lastName = " + lastName + ", " +
+                "email = " + email + ")";
+    }
 }
