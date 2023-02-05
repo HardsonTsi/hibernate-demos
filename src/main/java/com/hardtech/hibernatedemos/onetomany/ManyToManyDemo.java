@@ -33,15 +33,15 @@ public class ManyToManyDemo {
             // start a transaction
             session.beginTransaction();
 
-            //get course from db
-            Long id = 7L;
-            Course course = session.get(Course.class, id);
-            log.info("Loaded course: {}", course);
+            //get student from db
+            Long id = 1L;
+            Student student = session.get(Student.class, id);
+            log.info("Loaded student: {}", student);
 
-            //delete the course, confirm that students are NOT deleted
-            //only delete course_student course relationship
-            log.info("Deleting course: {}", course);
-            session.delete(course);
+            //delete the student, confirm that courses are NOT deleted
+            //only delete course_student relationship
+            log.info("Deleting student: {}", student);
+            session.delete(student);
 
             // commit transaction
             session.getTransaction().commit();
