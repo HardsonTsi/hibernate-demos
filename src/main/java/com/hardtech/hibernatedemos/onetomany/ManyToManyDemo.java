@@ -33,27 +33,24 @@ public class ManyToManyDemo {
             // start a transaction
             session.beginTransaction();
 
-            // create a course
-            Course tempCourse = new Course("Pacman - How To Score One Million Points");
+            //get student from db
+            Long id = 1L;
+            Student student = session.get(Student.class, id);
+            log.info("Loaded student: {}", student);
+            log.info("Courses: {}", student.getCourses());
 
-            // save the course
-            log.info("Saving the course ...");
-            session.save(tempCourse);
-            log.info("Saved the course: {}", tempCourse);
+            //create more courses
+            Course course1 = new Course("French");
+            Course course2 = new Course("English");
 
-            // create the students
-            Student tempStudent1 = new Student("Hard", "Tessi", "hardsontessi2@gmail.com");
-            Student tempStudent2 = new Student("Modeste", "Tessi", "modestetessi.code.com");
+            //add student to courses
+            log.info("Saving the courses...");
+            course1.addStudent(student);
+            course2.addStudent(student);
 
-            // add students to the course
-            tempCourse.addStudent(tempStudent1);
-            tempCourse.addStudent(tempStudent2);
-
-            // save the students
-            log.info("Saving students ...");
-            session.save(tempStudent1);
-            session.save(tempStudent2);
-            log.info("Saved students: {}", tempCourse.getStudents());
+            //save the courses
+            session.save(course1);
+            session.save(course2);
 
             // commit transaction
             session.getTransaction().commit();
