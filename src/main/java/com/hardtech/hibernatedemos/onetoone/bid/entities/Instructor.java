@@ -1,4 +1,4 @@
-package com.hardtech.hibernatedemos.onetoone.uni.entities;
+package com.hardtech.hibernatedemos.onetoone.bid.entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

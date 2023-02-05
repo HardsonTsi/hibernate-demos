@@ -1,14 +1,14 @@
-package com.hardtech.hibernatedemos.onetoone.uni;
+package com.hardtech.hibernatedemos.onetoone.bid;
 
-import com.hardtech.hibernatedemos.onetoone.uni.entities.Instructor;
-import com.hardtech.hibernatedemos.onetoone.uni.entities.InstructorDetail;
+import com.hardtech.hibernatedemos.onetoone.bid.entities.Instructor;
+import com.hardtech.hibernatedemos.onetoone.bid.entities.InstructorDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-@Slf4j(topic = "OneToOneUniDemo")
-public class OneToOneUniDemo {
+@Slf4j(topic = "OneToOneBidDemo")
+public class OneToOneBidDemo {
     public static void main(String[] args) {
         // create session factory
         SessionFactory factory = new Configuration()
@@ -21,20 +21,18 @@ public class OneToOneUniDemo {
         try (factory) {
             Session session = factory.getCurrentSession();
 
-            //create the objects
-            Instructor instructor = new Instructor("TESSI", "Hardson", "hardsontessi2@gmail.com");
-
-            InstructorDetail instructorDetail = new InstructorDetail("Hardtech", "Tech!");
-
-            //associate the objects
-            instructor.setInstructorDetail(instructorDetail);
-
             //start a transaction
             session.beginTransaction();
 
-            //save the instructor
-            log.info("Saving instructor: {}", instructor);
-            session.save(instructor);
+            //get the instructor detail object
+            Long id = 1L;
+            InstructorDetail instructorDetail = session.get(InstructorDetail.class, id);
+
+            //print the instructor detail
+            log.info("{}", instructorDetail);
+
+            //print the associated instructor
+            log.info("The associated instructor: {}", instructorDetail.getInstructor());
 
             //commit transaction
             session.getTransaction().commit();

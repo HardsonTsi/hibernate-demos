@@ -1,4 +1,4 @@
-package com.hardtech.hibernatedemos.onetoone.uni.entities;
+package com.hardtech.hibernatedemos.onetoone.bid.entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +21,8 @@ public class InstructorDetail {
     String youtubeChannel;
     @Column(name = "hobby")
     String hobby;
+    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    Instructor instructor;
 
     public InstructorDetail(String youtubeChannel, String hobby) {
         this.youtubeChannel = youtubeChannel;
