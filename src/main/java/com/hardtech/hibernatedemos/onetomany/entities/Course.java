@@ -1,5 +1,6 @@
 package com.hardtech.hibernatedemos.onetomany.entities;
 
+import com.hardtech.hibernatedemos.entities.Student;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -30,6 +31,15 @@ public class Course {
     @JoinColumn(name = "course_id")
     List<Review> reviews = new ArrayList<>();
 
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    List<Student> students = new ArrayList<>();
+
     public Course(String title) {
         this.title = title;
     }
@@ -38,6 +48,10 @@ public class Course {
     public void addReview(Review review) {
         this.reviews.add(review);
         review.setCourse(this);
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     @Override
