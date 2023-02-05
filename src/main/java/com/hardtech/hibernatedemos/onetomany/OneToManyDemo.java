@@ -31,11 +31,12 @@ public class OneToManyDemo {
 
             //get a course
             Long id = 1L;
-            Course course = session.get(Course.class, id);
+            Instructor instructor = session.get(Instructor.class, id);
 
-            //delete a course
-            log.info("Deleting course: {}", course);
-            session.delete(course);
+            log.info("Instructor: {}", instructor);
+
+            //get courses of instructor
+            log.info("Courses: {}", instructor.getCourses());
 
             //commit transaction
             session.getTransaction().commit();
