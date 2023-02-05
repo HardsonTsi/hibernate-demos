@@ -7,8 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.Objects;
-
 @Slf4j(topic = "OneToOneUniDemo")
 public class OneToOneUniDemo {
     public static void main(String[] args) {
@@ -23,20 +21,20 @@ public class OneToOneUniDemo {
         try (factory) {
             Session session = factory.getCurrentSession();
 
+            //create the objects
+            Instructor instructor = new Instructor("TESSI", "Hardson", "hardsontessi2@gmail.com");
+
+            InstructorDetail instructorDetail = new InstructorDetail("Hardtech", "Tech!");
+
+            //associate the objects
+            instructor.setInstructorDetail(instructorDetail);
+
             //start a transaction
             session.beginTransaction();
 
-            //get instructor by primary key: id = 1
-            Long id = 1L;
-            Instructor instructor = session.get(Instructor.class, id);
-
-            log.info("Found instructor: {}", instructor);
-
-            //delete the instructor
-            if (Objects.nonNull(instructor)) {
-                log.info("Deleting: {}", instructor);
-                session.delete(instructor);
-            }
+            //save the instructor
+            log.info("Saving instructor: {}", instructor);
+            session.save(instructor);
 
             //commit transaction
             session.getTransaction().commit();
