@@ -29,14 +29,13 @@ public class OneToManyDemo {
             //start a transaction
             session.beginTransaction();
 
-            //get instructor from db
+            //get a course
             Long id = 1L;
-            Instructor instructor = session.get(Instructor.class, id);
+            Course course = session.get(Course.class, id);
 
-            log.info("Instructor: {}", instructor);
-
-            //get courses of instructor
-            log.info("Courses: {}", instructor.getCourses());
+            //delete a course
+            log.info("Deleting course: {}", course);
+            session.delete(course);
 
             //commit transaction
             session.getTransaction().commit();
