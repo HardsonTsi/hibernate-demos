@@ -25,7 +25,7 @@ public class OneToOneBidDemo {
             session.beginTransaction();
 
             //get the instructor detail object
-            Long id = 1L;
+            Long id = 3L;
             InstructorDetail instructorDetail = session.get(InstructorDetail.class, id);
 
             //print the instructor detail
@@ -35,6 +35,8 @@ public class OneToOneBidDemo {
             log.info("The associated instructor: {}", instructorDetail.getInstructor());
 
             //now let's delete the instructor detail
+            //remove the associated object reference, break bi-directional link
+            instructorDetail.getInstructor().setInstructorDetail(null);
             log.info("Deleting instructorDetail: {}", instructorDetail);
             session.delete(instructorDetail);
 
