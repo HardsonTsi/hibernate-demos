@@ -33,23 +33,10 @@ public class OneToManyDemo {
             Long id = 1L;
             Instructor instructor = session.get(Instructor.class, id);
 
-            //create some courses
-            Course course1 = new Course("Algo");
-            Course course2 = new Course("DSA");
+            log.info("Instructor: {}", instructor);
 
-            //add course to instructor
-            instructor.addCourse(course1);
-            instructor.addCourse(course2);
-
-            //save the course
-            session.save(course1);
-            session.save(course2);
-
-            //save the instructor
-            session.save(instructor);
-
-            //print the instructor detail
-            log.info("{}", instructor);
+            //get courses of instructor
+            log.info("Courses: {}", instructor.getCourses());
 
             //commit transaction
             session.getTransaction().commit();
