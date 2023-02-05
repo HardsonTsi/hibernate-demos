@@ -28,8 +28,6 @@ public class OneToManyUniDemo {
         try (factory) {
             Session session = factory.getCurrentSession();
 
-
-
             //start a transaction
             session.beginTransaction();
 
@@ -42,6 +40,9 @@ public class OneToManyUniDemo {
 
             //print the course reviews
             log.info("Reviews: {}", course.getReviews());
+
+            //delete the course
+            session.delete(course);
 
             //commit transaction
             session.getTransaction().commit();
