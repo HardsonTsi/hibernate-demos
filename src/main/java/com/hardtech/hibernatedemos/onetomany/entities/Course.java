@@ -1,6 +1,5 @@
 package com.hardtech.hibernatedemos.onetomany.entities;
 
-import com.hardtech.hibernatedemos.entities.Student;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

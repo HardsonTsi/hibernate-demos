@@ -1,6 +1,6 @@
 package com.hardtech.hibernatedemos;
 
-import com.hardtech.hibernatedemos.entities.Student;
+import com.hardtech.hibernatedemos.onetomany.entities.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

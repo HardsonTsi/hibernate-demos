@@ -1,6 +1,6 @@
 package com.hardtech.hibernatedemos.onetomany;
 
-import com.hardtech.hibernatedemos.entities.Student;
+import com.hardtech.hibernatedemos.onetomany.entities.Student;
 import com.hardtech.hibernatedemos.onetomany.entities.Course;
 import com.hardtech.hibernatedemos.onetomany.entities.Instructor;
 import com.hardtech.hibernatedemos.onetomany.entities.InstructorDetail;

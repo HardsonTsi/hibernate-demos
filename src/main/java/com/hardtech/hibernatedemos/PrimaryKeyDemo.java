@@ -1,6 +1,6 @@
 package com.hardtech.hibernatedemos;
 
-import com.hardtech.hibernatedemos.entities.Student;
+import com.hardtech.hibernatedemos.onetomany.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

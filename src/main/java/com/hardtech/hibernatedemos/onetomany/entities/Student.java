@@ -1,6 +1,5 @@
-package com.hardtech.hibernatedemos.entities;
+package com.hardtech.hibernatedemos.onetomany.entities;
 
-import com.hardtech.hibernatedemos.onetomany.entities.Course;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
