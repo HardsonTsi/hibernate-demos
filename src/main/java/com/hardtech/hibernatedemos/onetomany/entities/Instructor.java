@@ -31,7 +31,7 @@ public class Instructor {
     InstructorDetail instructorDetail;
 
     //do not apply cascading deletes
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
     @ToString.Exclude
