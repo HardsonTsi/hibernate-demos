@@ -34,6 +34,10 @@ public class OneToOneBidDemo {
             //print the associated instructor
             log.info("The associated instructor: {}", instructorDetail.getInstructor());
 
+            //now let's delete the instructor detail
+            log.info("Deleting instructorDetail: {}", instructorDetail);
+            session.delete(instructorDetail);
+
             //commit transaction
             session.getTransaction().commit();
 
